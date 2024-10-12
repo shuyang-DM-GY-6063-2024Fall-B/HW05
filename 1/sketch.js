@@ -1,4 +1,4 @@
-let backgroundC = 'white';
+let backgroundC = '#4d7ab0';
 let moonX = 250;
 let moonY = 300;
 let moonR = 300;
@@ -81,6 +81,7 @@ function draw() {
 // Draw water waves with a color gradient
   for(let a = 0;a<height;a+=50){
     stroke(105-a/5, 255-a/2.5, 203+a/5,255-a/5)
+    strokeWeight(2)
     waterWave((a+varialT*10)%(width)-width*1.5,a,width,10)
 
   }
