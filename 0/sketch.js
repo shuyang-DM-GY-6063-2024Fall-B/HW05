@@ -6,7 +6,7 @@ function setup(){
   createCanvas(windowWidth, windowHeight);
 
 }
-
+// Draw a sun with rotating hole
 function sun(x,y,d,time){
   push()
   translate(x, y)
@@ -30,23 +30,25 @@ function sun(x,y,d,time){
   ellipse(0,0,2*d)
   pop()
 }
-
+// Draw a rotating moon that waxes and wanes
 function moon(x,y,d,time){
   push()
-  noStroke()
+  translate(x, y)
   rotate(time)
+  noStroke()
   fill('yellow')
-  ellipse(x, y, d)
+  ellipse(0, 0, d)
   D = abs(sin(time)*d)
   fill(backgroundC)
-  ellipse(x-D,y,d)
+  ellipse(0-D,0,d)
   pop()
 }
 
+// Difine the position of moon and sun according to the hour
 function starclock(hour,time){
   push()
   translate(width/2,height/2)
-  if(hour >= 6 && hour <= 18){
+  if(hour >= 6 && hour <= 17){
     rotate(hour*15)
     sun(-height/2,0,25,time)
   }
@@ -57,8 +59,9 @@ function starclock(hour,time){
   pop()
 
 }
+// Represents time by petals
 function flowerclock(scale,hour,minute,second,time){
-  // hour
+  // Hour layer of petals
   push()
   noStroke()
   translate(width/2,height/2)
@@ -76,7 +79,7 @@ function flowerclock(scale,hour,minute,second,time){
   quad(0,0,-(scaleLastHour+  movement)*sin(7.5),scaleLastHour+movement,0,(scaleLastHour+movement)*1.3,(scaleLastHour+movement)*sin(7.5),scaleLastHour+movement)
   pop()
 
-  // minute
+  // Minute layer of petals
   push()
   noStroke()
   translate(width/2,height/2)
@@ -95,7 +98,7 @@ function flowerclock(scale,hour,minute,second,time){
   quad(0,0,-(scaleLastMinute +  movement)*sin(15),scaleLastMinute+movement,0,(scaleLastMinute+movement)*1.3,(scaleLastMinute+movement)*sin(15),scaleLastMinute+movement)
   pop()
 
-  // second
+  // Second layer of petals
   push()
   noStroke()
   translate(width/2,height/2)
@@ -125,6 +128,7 @@ function draw(){
   let hourT = hour()
   let minuteT = minute()
   let secondT = second()
+// Making background color changew according to hour
   colormap = map(hourT, 0, 23, -90, 270)
   value = sin(colormap)
   bgR = map(value,-1,1,0,145)
@@ -133,14 +137,9 @@ function draw(){
   background(bgR,bgG,bgB)
   backgroundC = [bgR,bgG,bgB] 
 
+// Draw the clock made before
   starclock(hourT,varialT)
   flowerclock(60,hourT,minuteT,secondT,millisT)
-
-  // if(hour)
-
-
-  // moon(300,300,50,varialT)
-  // sun(400,400,50,varialT)
 
 
 
